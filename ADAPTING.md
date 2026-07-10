@@ -24,7 +24,7 @@ what makes the ontology earn its keep. A clean dataset makes a boring demo.
 
 1. **Rename the databases** via `config.env` (no code edits) — see the README's
    setup section. That handles the plumbing; the *story* is the real work.
-2. **Rewrite the three source-system load scripts** (`sql/01`–`03`) with your
+2. **Rewrite the three source-system load scripts** (`sql/data/01`–`03`) with your
    domain's tables and the same intentional messiness. Keep ~50 core entities so
    the graph stays legible.
 3. **Re-run the ontology-stack-builder** (the skill that generated `sql/ontology/`)

@@ -38,9 +38,9 @@ fi
 export EMR_DB EMR_SCHEMA ONTOLOGY_DB ONTOLOGY_SCHEMA CLAIMS_DB CLAIMS_SCHEMA RX_DB RX_SCHEMA WAREHOUSE
 
 SOURCE_FILES=(
-  sql/01_clinical_emr.sql
-  sql/02_payer_claims.sql
-  sql/03_pharmacy_ops.sql
+  sql/data/01_clinical_emr.sql
+  sql/data/02_payer_claims.sql
+  sql/data/03_pharmacy_ops.sql
 )
 ONTOLOGY_FILES=(
   sql/ontology/01_phase4_layers_1-3.sql

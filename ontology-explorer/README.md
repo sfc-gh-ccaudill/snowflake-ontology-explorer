@@ -30,7 +30,7 @@ The browser cannot read `connections.toml` or sign JWTs, so a thin local **Expre
 
 - Node.js 18+ (tested on 25)
 - A `DEMO` connection in `~/.snowflake/connections.toml` (key-pair auth). This app reads it automatically.
-- (Optional, for live sample rows) the demo data loaded via the repo's `sql/01–03` scripts.
+- (Optional, for live sample rows) the demo data loaded via the repo's `sql/data/01–03` scripts.
 
 ## Run it
 
