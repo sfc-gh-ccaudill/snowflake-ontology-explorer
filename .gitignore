@@ -7,7 +7,8 @@ node_modules/
 # ---------------------------------------------------------------------------
 # Build / rendered output
 # ---------------------------------------------------------------------------
-build/                    # rendered SQL emitted by deploy.sh
+# ./build holds SQL rendered by deploy.sh
+build/
 dist/
 **/dist/
 .vite/
@@ -19,7 +20,8 @@ dist/
 .env
 **/.env
 *.local
-config.env                # local deploy overrides; commit config.env.example instead
+# local deploy overrides; commit config.env.example instead
+config.env
 
 # ---------------------------------------------------------------------------
 # Logs
