@@ -1,0 +1,17 @@
+{
+  "name": "ontology-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interactive ontology network explorer + Cortex Agent chat over the messy healthcare data demo.",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix frontend",
+    "dev": "concurrently -n server,web -c cyan,green \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:web": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "npm run start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

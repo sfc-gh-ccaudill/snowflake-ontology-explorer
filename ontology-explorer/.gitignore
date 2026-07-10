@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# build output
+frontend/dist/
+frontend/.vite/
+
+# env / secrets
+.env
+*.local
+
+# logs
+*.log
+npm-debug.log*
+
+# os
+.DS_Store
