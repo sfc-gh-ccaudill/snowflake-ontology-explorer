@@ -2,8 +2,6 @@
 
 Deploy an **Ontology-on-Snowflake knowledge graph** into your own account, then **visualize and explore it** in a local web app. The repo ships everything you need end to end: synthetic (deliberately messy) healthcare data across three source systems, the SQL that builds a full ontology layer on top of it, and a React + Express app that renders the ontology as a graph and lets you chat with a Cortex Agent over it.
 
-Nothing here is pre-deployed — you run `./deploy.sh` to build it all in your account.
-
 ![The Ontology Explorer app: the ontology rendered as a class graph, with an Inspector showing a class's properties, relationships, and cross-system source mappings](assets/images/ontology.png)
 
 > **Internal Snowflake enablement asset** — synthetic data only, not for external distribution. To re-skin it for another industry, see [ADAPTING.md](ADAPTING.md).
@@ -20,14 +18,16 @@ Use this repo to:
 
 - A Snowflake account in a **Cortex-enabled region** (the semantic views + agent use Cortex Analyst).
 - A role that can `CREATE DATABASE` (e.g. `SYSADMIN`) and a warehouse (e.g. `COMPUTE_WH`).
-- **Snowflake CLI** (`snow`) with a connection in `~/.snowflake/connections.toml`.
+- **Snowflake CLI** (`snow`) with a connection in `~/.snowflake/connections.toml`. Check what you have with `snow connection list`. The deploy defaults to a connection named `DEMO` — if yours is named something else (it usually is), point `SNOWFLAKE_CONNECTION` at it in `config.env` (see below).
 - For the web app only: **Node 18+** and a **key-pair** connection (the browser cannot sign JWTs).
 
 ## Deploy the data + ontology
 
+> **Using Cortex Code?** Just open this repo in CoCo and ask it to deploy — the root [`COCO.md`](COCO.md) tells it the connection-first deploy flow, subcommands, and guardrails. The manual steps below are the same thing by hand.
+
 ```bash
-# Optional: deploy under your OWN database names (defaults work out of the box).
-cp config.env.example config.env      # then edit the names/connection
+# Copy the config and set SNOWFLAKE_CONNECTION to your connection (db names are optional).
+cp config.env.example config.env      # then edit — at minimum, set SNOWFLAKE_CONNECTION
 
 ./deploy.sh                 # load data -> build ontology -> verify, via `snow`
 ./deploy.sh render          # only render SQL into ./build (to paste into a worksheet)
@@ -40,14 +40,14 @@ cp config.env.example config.env      # then edit the names/connection
 
 | Variable | Default | Names |
 |----------|---------|-------|
-| `SNOWFLAKE_CONNECTION` | `DEMO` | which `connections.toml` entry to deploy with |
+| `SNOWFLAKE_CONNECTION` | `DEMO` | which `connections.toml` entry to deploy with — **set this to your own connection name** |
 | `BUILD_ROLE` / `WAREHOUSE` | `SYSADMIN` / `COMPUTE_WH` | role + warehouse for the build |
 | `EMR_DB` / `EMR_SCHEMA` | `CLINICAL_EMR` / `EHR` | clinical EMR source |
 | `CLAIMS_DB` / `CLAIMS_SCHEMA` | `PAYER_CLAIMS` / `CLAIMS` | payer claims source |
 | `RX_DB` / `RX_SCHEMA` | `PHARMACY_OPS` / `RX` | pharmacy source |
 | `ONTOLOGY_DB` / `ONTOLOGY_SCHEMA` | `=EMR_DB` / `ONTOLOGY` | where the ontology is built |
 
-Defaults reproduce the reference build exactly, so `./deploy.sh` works with no config. The web app reads the same names (via `server/.env`).
+The database-name defaults reproduce the reference build exactly, so the only value most people need to change is `SNOWFLAKE_CONNECTION`. The web app reads the same names (via `server/.env`).
 
 ## Explore it in the web app
 
